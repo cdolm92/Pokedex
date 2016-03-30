@@ -19,6 +19,8 @@ class Pokemon {
     private var _weight: String!
     private var _attack: String!
     private var _nextEvolutionTxt: String!
+    private var _nextEvolutionId: String!
+    private var _nextEvolutionLvl: String!
     private var _pokemonUrl: String!
     
     
@@ -107,7 +109,36 @@ class Pokemon {
                         
                     } else {
                         self._description = ""
+                    }
                         
+                    
+                    if let evolutions = dict["evolutions"] as? [Dictionary<String,AnyObject>] where evolutions.count > 0 {
+                        
+                        if let to = evolutions[0]["to"] as? String {
+                            
+                            //Can't support mega pokemon right now but
+                            //api still has mega data
+                            if to.rangeOfString("mega") == nil {
+                                
+                                if let uri = evolutions[0]["resource_uri"] as? String {
+                                    
+                                    let newStr = uri.stringByReplacingOccurrencesOfString("/api/v1/pokemon/", withString: "")
+                                    let num = newStr.stringByReplacingOccurrencesOfString("/", withString: "")
+                                    
+                                    self._nextEvolutionId = num
+                                    self._nextEvolutionTxt = to
+                                    
+                                    if let lvl = evolutions[0]["level"] as? Int {
+                                        self._nextEvolutionLvl = "\(lvl)"
+                                    }
+                                    
+                                    print(self._nextEvolutionId)
+                                    print(self._nextEvolutionTxt)
+                                    print(self._nextEvolutionLvl)
+                                }
+                            }
+                            
+                        }
                     }
                 }
             }
