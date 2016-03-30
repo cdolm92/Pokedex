@@ -23,6 +23,68 @@ class Pokemon {
     private var _nextEvolutionLvl: String!
     private var _pokemonUrl: String!
     
+    var description: String {
+        if _description == nil {
+            _description = ""
+        }
+        return _description
+    }
+    
+    var type: String {
+        if _type == nil {
+            _type = ""
+        }
+        return _type
+    }
+    
+    var defense: String {
+        if _defense == nil{
+            _defense = ""
+        }
+        return _defense
+    }
+    
+    var height: String {
+        if _height == nil {
+            _height = ""
+        }
+        return _height
+    }
+    
+    var weight: String {
+        if _weight == nil {
+            _weight = ""
+        }
+        return _weight
+    }
+    
+    var attack: String {
+        if _attack == nil {
+            _attack = ""
+        }
+        return _attack
+    }
+    
+    var nextEvolutionTxt: String {
+        if _nextEvolutionTxt == nil {
+            _nextEvolutionTxt = ""
+        }
+        return _nextEvolutionTxt
+    }
+    
+    var nextEvolutionId: String {
+        if _nextEvolutionId == nil {
+            _nextEvolutionId = ""
+        }
+        return _nextEvolutionId
+    }
+    
+    var nextEvolutionLvl: String {
+        if _nextEvolutionId == nil {
+            _nextEvolutionLvl = ""
+        }
+        return _nextEvolutionLvl
+    }
     
     var name: String {
         return _name
@@ -128,8 +190,12 @@ class Pokemon {
                                     self._nextEvolutionId = num
                                     self._nextEvolutionTxt = to
                                     
-                                    if let lvl = evolutions[0]["level"] as? Int {
-                                        self._nextEvolutionLvl = "\(lvl)"
+                                    if let lvlExist = evolutions[0]["level"] as? Int {
+                                            if let lvl = lvlExist as? Int {
+                                            self._nextEvolutionLvl = "\(lvl)"
+                                        }
+                                    } else {
+                                        self._nextEvolutionLvl = ""
                                     }
                                     
                                     print(self._nextEvolutionId)
