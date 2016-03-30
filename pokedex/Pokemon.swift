@@ -191,7 +191,7 @@ class Pokemon {
                                     self._nextEvolutionTxt = to
                                     
                                     if let lvlExist = evolutions[0]["level"] as? Int {
-                                            if let lvl = lvlExist as? Int {
+                                            if let lvl = lvlExist as Int? {
                                             self._nextEvolutionLvl = "\(lvl)"
                                         }
                                     } else {
